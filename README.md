@@ -14,3 +14,8 @@ This project contain easy to create container lamp stack to work on various envi
 ## Create and run container
 ~ docker compose up
 ```
+
+## Website
+1. Apache : 80, 443 : http://localhost
+2. mysql : 3306
+3. phpmyadmin : 8001 : http://localhost:8001 
