@@ -6,7 +6,7 @@ services:
         image: mysql:8
         environment:
             MYSQL_ROOT_PASSWORD: sorabh
-            MYSQL_DATABASE: docker_mysql8
+            MYSQL_DATABASE: docker_php8
             MYSQL_USER: docker_php8
             MYSQL_PASSWORD: password
         ports:
