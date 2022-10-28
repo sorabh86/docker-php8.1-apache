@@ -1,29 +1,46 @@
 version: '3'
+
 services:
     db:
         container_name: mysql8
         image: mysql:8
         environment:
             MYSQL_ROOT_PASSWORD: sorabh
-            MYSQL_DATABASE: lamp_docker
-            MYSQL_USER: php8_docker
+            MYSQL_DATABASE: docker_mysql8
+            MYSQL_USER: docker_php8
             MYSQL_PASSWORD: password
         ports:
             - "3306:3306"
+        networks:
+            - docker_lamp8
+            
     www: 
+        depends_on:
+            - db
         container_name: apache-php8
-        # build: php:8.1.1-apache
+        # image: php:8.1.1-apache
         build: .
         volumes: 
             - "D:\\www:/var/www/html"
         ports:
             - "80:80"
-            # - "443:443"
-    # phpmyadmin:
-    #     image: phpmyadmin/phpmyadmin
-    #     ports: 
-    #         - 8001:80
-    #     environment:
-    #         - PMA_HOST=db
-    #         - PMA_PORT=3306
+            - "443:443"
+        networks:
+            - docker_lamp8
+
+    phpmyadmin:
+        depends_on:
+            - db
+        image: phpmyadmin/phpmyadmin
+        ports: 
+            - 8001:80
+        environment:
+            - PMA_HOST=db
+            - PMA_PORT=3306
+        networks:
+            - docker_lamp8
+
+networks:
+    docker_lamp8:
+        driver: bridge
 
